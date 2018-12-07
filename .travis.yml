@@ -1,10 +1,15 @@
 sudo: required
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -f Dockerfile.dev -t nginxreact .
-
+- docker build -f Dockerfile.dev -t nginxreact .
 script:
-  - docker run nginxreact npm run test -- --coverage
+- docker run nginxreact npm run test -- --coverage
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: F7ZSVxorVIUyXCYzFZsNy7gCMxySNFbv4QYjUrbVpfmaJZTHCEjvIrukas4vfLFgNsgbwoMYwZSywpiasNBRKwDI25XHWzmTQuCqXhxaHWCGXnDqUahl+C9BlI5mH6UmXHbiac+2rmZF5siitHSxvgQeV27AhxQc+aBRn9jZD4UWBhUlORQSACtmYfohRe35rDYMRgElUBrgCWIuiiJ+F0YwrjI6Usx80uQyv5KJD5hg9/2ydbBVmCs/0/sVMq1PB1y22kh1YhQlwgL1FyJWCMhfa691FhFNt9Xu+Y9x7NZ+Z3A7j/yK0gBuUbyh78gJoNUMW4/uTvFe+IF06jgghL2RtGbtdjoWTZfrbSZCulqr9b+3U4ghyragGXuK2ZRYe8+ZY8S3X82+NWwSmW7a+FwTbGWc35yKh5+tLHdSPpMBo87kGKpmNxpBAVTRuqQSYb7VYh5dNGq8G1LqY+TNT5t+TKDTXl1XsDbXZbx0qR1oFLnBfV4ZrR3bWIaof+1Rk0HUyA3nyH3pcRajFikXnR9/29S1vbLficLcLHFXQn+nSguSANR/wQJwCiiS1UuwkkYjS/UWxcnVNNqZyEmrl5IEMv0CeJnnP6uzdZnfFHKLWIUOHvnFLsfjUoMnVoMaiIJ+Nl/habNw+//6XPGQ2gMxb3PKFRlF1fc+8ikWQgk=
+  app: docker-react-mbtest
+  on: master
 
